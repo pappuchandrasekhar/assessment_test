@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+   <style>
+       .b1{
+       #border:1px solid #ccc;
+       margin-top:10px;
+       }
+       .bostyles{
+          border:1px solid #ccc;
+          border-radius:10px;
+          margin:10px;
+          padding:10px;
+       }
+       .col-md-12{
+       padding-bottom:5px;
+       }
+       .b1styles{
+          margin:10px;
+          padding:10px;
+       }
+   </style>
+</head>
+
+<div class="container b1">
+    <form method="post" name="exam">
+        {% csrf_token%}
+
+
+        {% for questions_get in question_data %}
+
+            <div class="row bostyles">
+                <div class="col-md-12">
+
+                    <input type="hidden" name="question_ids[]" value="{{ questions_get.id }}">
+                    {{ forloop.counter }}. {{ questions_get.question }}</div>
+                 <div class="col-md-3"><input type="radio" name="answer{{ questions_get.id }}[]" value="{{ questions_get.choice_1 }}">{{ questions_get.choice_1 }}</div>
+                <div class="col-md-3"><input type="radio" name="answer{{ questions_get.id }}[]" value="{{ questions_get.choice_2 }}">{{ questions_get.choice_2 }}</div>
+                <div class="col-md-3"><input type="radio" name="answer{{ questions_get.id }}[]" value="{{ questions_get.choice_3 }}">{{ questions_get.choice_3 }}</div>
+                <div class="col-md-3"><input type="radio" name="answer{{ questions_get.id }}[]" value="{{ questions_get.choice_4 }}">{{ questions_get.choice_4 }}</div>
+            </div>
+        {% endfor %}
+        <div class="row b1styles">
+            <div class="col-md-6">
+            <button class="btn btn-primary">Submit</button>
+                </div>
+        </div>
+
+    </form>
+
+
+
+</div>
+</body>
+</html>
